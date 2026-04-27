@@ -34,7 +34,7 @@ Iterate per error until the finding is sharp. Accumulate findings across the con
 
 ## Dispatch
 
-When the user types `dispatch`, `send to inbox`, `ready to push`, or any equivalent phrase, output every accumulated finding as a single markdown block — no preamble, no closing remarks, no recap, just the findings ready to paste verbatim into the Claude Code /cowork inbox.
+When the user types `dispatch`, `send to inbox`, `ready to push`, or any equivalent phrase, output every accumulated finding as a single markdown block in the format defined below. No preamble, no closing remarks, no recap — just the findings, in inbox-ready format. The block flows into the Claude Code /cowork inbox via whatever transport the user has wired up; that is downstream of you and not your concern.
 
 ### Format per finding
 

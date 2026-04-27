@@ -30,7 +30,7 @@ Dump every finding from this conversation as a single markdown block formatted f
 
 If a finding involves data destruction (DELETE, TRUNCATE, DROP, RESET, deleteMany, migrate reset, db push --force-reset, or UPDATE of historical rows), flag it explicitly in the body so the bridge can pause for confirmation.
 
-No preamble, no closing remarks, no recap. Output the findings only, ready to paste verbatim.
+No preamble, no closing remarks, no recap. Output the findings only — the block flows into the Claude Code /cowork inbox via whatever transport is wired up.
 ```
 
 For richer per-project setup (Project-level custom instructions in your upstream Claude surface), see `~/.claude/cowork-project-instructions.md`.
