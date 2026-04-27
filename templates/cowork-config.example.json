@@ -1,5 +1,5 @@
 {
-  "$comment": "Optional config for cowork-bridge. Copy to ~/.claude/cowork-config.json (drop the $comment / $usage fields) or just delete this file — the skill works without it. See docs/configuration.md for the full schema.",
+  "$comment": "Optional config for claude-cowork-bridge. Copy to ~/.claude/cowork-config.json (drop the $comment / $usage fields) or just delete this file — the skill works without it. See docs/configuration.md for the full schema.",
   "$usage": "If 'apps' is set, the parser scans finding bodies for these literal names and uses them to classify in-scope vs out-of-scope. If 'projectRoots' is set, the skill maps the working directory against those roots to determine the current scope (the next path segment after the matched root).",
 
   "apps": ["app-one", "app-two", "shared-lib"],

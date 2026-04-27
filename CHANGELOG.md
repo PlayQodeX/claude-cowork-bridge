@@ -10,7 +10,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- Initial public release of `cowork-bridge`.
+- Initial public release of `claude-cowork-bridge`.
 - `/cowork` Claude Code skill — paste-driven dispatch from any upstream Claude conversation surface (Cowork, Claude.ai, Claude Desktop, Claude for Work) into Claude Code as actionable tasks.
 - Batch-by-default execution: one summary block, one confirmation reply (`go` / `select` / `skip`), then sequential run of every in-scope finding without per-step prompting.
 - Lenient parser handling four shapes of upstream output: top-level `##` headings, `---` separators, numbered list items, single-block fallback.

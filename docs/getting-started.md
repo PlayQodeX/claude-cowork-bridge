@@ -8,12 +8,12 @@ Pick whichever installer matches your shell:
 
 ```bash
 # Bash / Git Bash on Windows / macOS / Linux
-curl -L https://raw.githubusercontent.com/PlayQodeX/cowork-bridge/main/install.sh | bash
+curl -L https://raw.githubusercontent.com/PlayQodeX/claude-cowork-bridge/main/install.sh | bash
 ```
 
 ```powershell
 # PowerShell on Windows
-irm https://raw.githubusercontent.com/PlayQodeX/cowork-bridge/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/PlayQodeX/claude-cowork-bridge/main/install.ps1 | iex
 ```
 
 Either installer copies `skills/cowork/SKILL.md` into `~/.claude/skills/cowork/` and seeds `~/.claude/cowork-inbox.md` if it does not already exist. Existing files are never overwritten.

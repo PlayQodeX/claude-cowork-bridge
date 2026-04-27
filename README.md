@@ -1,4 +1,4 @@
-# cowork-bridge
+# claude-cowork-bridge
 
 A Claude Code skill that bridges any Claude conversation surface (Cowork, Claude.ai, Claude Desktop, Claude for Work) into Claude Code as actionable tasks. You audit, debug, or brainstorm in one Claude surface; the output flows into a paste-driven inbox; `/cowork` in Claude Code triages it, asks one confirmation, and burns through the batch sequentially with full project-rule honouring.
 
@@ -6,7 +6,7 @@ A Claude Code skill that bridges any Claude conversation surface (Cowork, Claude
 
 Claude has many surfaces. Conversations on one of them (claude.ai, Cowork, Claude Desktop, Claude for Work) do not natively connect to Claude Code's filesystem-and-task layer. In practice this means copying findings one at a time, pasting into Claude Code, asking for a fix, and repeating. Slow, error-prone, impossible to batch, and easy to lose track of which findings have been actioned.
 
-`cowork-bridge` closes that gap with a thin, founder-owned glue layer. It is not an app. It is one Claude Code skill (`/cowork`) plus two configuration files in `~/.claude/`.
+`claude-cowork-bridge` closes that gap with a thin, founder-owned glue layer. It is not an app. It is one Claude Code skill (`/cowork`) plus two configuration files in `~/.claude/`.
 
 ## How it works
 
@@ -23,20 +23,20 @@ The skill is project-agnostic. It applies whatever rules your project's `CLAUDE.
 ### One-line install (Bash / Git Bash on Windows / macOS / Linux)
 
 ```bash
-curl -L https://raw.githubusercontent.com/PlayQodeX/cowork-bridge/main/install.sh | bash
+curl -L https://raw.githubusercontent.com/PlayQodeX/claude-cowork-bridge/main/install.sh | bash
 ```
 
 ### One-line install (PowerShell)
 
 ```powershell
-irm https://raw.githubusercontent.com/PlayQodeX/cowork-bridge/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/PlayQodeX/claude-cowork-bridge/main/install.ps1 | iex
 ```
 
 ### Manual install
 
 ```bash
-git clone https://github.com/PlayQodeX/cowork-bridge.git
-cd cowork-bridge
+git clone https://github.com/PlayQodeX/claude-cowork-bridge.git
+cd claude-cowork-bridge
 ./install.sh   # or .\install.ps1 on Windows PowerShell
 ```
 
@@ -66,7 +66,7 @@ See [docs/configuration.md](docs/configuration.md) for the full schema.
 
 Claude's currently-shipped dispatch primitives are time-based or in-session: `/schedule` (cron-driven remote agents), `/loop` (interval-driven prompt re-runs), the Agent / Task tool (in-session sub-agents), and Anthropic Managed Agents via the SDK (programmatic dispatch). None of these natively connect a Claude conversation in one surface to a Claude Code session on the user's machine for execution. The dispatch surface in every native primitive is either Claude Code itself or a process Anthropic explicitly built a bridge for.
 
-`cowork-bridge` fills that cross-surface gap with founder-owned glue. The architecture is intentionally trivial to retire: a single skill-folder delete reverts to whichever native primitive eventually replaces it. Until then, the bridge is the lightest reasonable solution that captures the workflow.
+`claude-cowork-bridge` fills that cross-surface gap with founder-owned glue. The architecture is intentionally trivial to retire: a single skill-folder delete reverts to whichever native primitive eventually replaces it. Until then, the bridge is the lightest reasonable solution that captures the workflow.
 
 ## Documentation
 

@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-# cowork-bridge installer (Bash / Git Bash / macOS / Linux)
+# claude-cowork-bridge installer (Bash / Git Bash / macOS / Linux)
 #
 # Idempotent: copies the skill, seeds inbox/instructions only if they don't
 # already exist. Safe to re-run.
 #
 # Two modes of invocation:
-#   1. Piped:  curl -L https://raw.githubusercontent.com/PlayQodeX/cowork-bridge/main/install.sh | bash
-#   2. Local:  cd cowork-bridge && ./install.sh
+#   1. Piped:  curl -L https://raw.githubusercontent.com/PlayQodeX/claude-cowork-bridge/main/install.sh | bash
+#   2. Local:  cd claude-cowork-bridge && ./install.sh
 
 set -euo pipefail
 
-REPO_URL="https://github.com/PlayQodeX/cowork-bridge.git"
+REPO_URL="https://github.com/PlayQodeX/claude-cowork-bridge.git"
 
 CLAUDE_DIR="${HOME}/.claude"
 SKILLS_DIR="${CLAUDE_DIR}/skills"
@@ -29,9 +29,9 @@ CLEANUP_TMPDIR=""
 if [[ -n "${SCRIPT_DIR}" && -f "${SCRIPT_DIR}/skills/cowork/SKILL.md" ]]; then
   SRC_DIR="${SCRIPT_DIR}"
 else
-  SRC_DIR="$(mktemp -d -t cowork-bridge-XXXXXX)"
+  SRC_DIR="$(mktemp -d -t claude-cowork-bridge-XXXXXX)"
   CLEANUP_TMPDIR="${SRC_DIR}"
-  echo "Fetching cowork-bridge into ${SRC_DIR}..."
+  echo "Fetching claude-cowork-bridge into ${SRC_DIR}..."
   git clone --depth 1 "${REPO_URL}" "${SRC_DIR}" >/dev/null 2>&1
 fi
 
@@ -42,7 +42,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-echo "Installing cowork-bridge into ${CLAUDE_DIR}"
+echo "Installing claude-cowork-bridge into ${CLAUDE_DIR}"
 
 mkdir -p "${SKILLS_DIR}" "${COWORK_SKILL_DIR}"
 

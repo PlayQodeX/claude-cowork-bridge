@@ -1,15 +1,15 @@
-# cowork-bridge installer (PowerShell)
+# claude-cowork-bridge installer (PowerShell)
 #
 # Idempotent: copies the skill, seeds inbox/instructions only if they don't
 # already exist. Safe to re-run.
 #
 # Two modes of invocation:
-#   1. Piped:  irm https://raw.githubusercontent.com/PlayQodeX/cowork-bridge/main/install.ps1 | iex
-#   2. Local:  cd cowork-bridge ; .\install.ps1
+#   1. Piped:  irm https://raw.githubusercontent.com/PlayQodeX/claude-cowork-bridge/main/install.ps1 | iex
+#   2. Local:  cd claude-cowork-bridge ; .\install.ps1
 
 $ErrorActionPreference = 'Stop'
 
-$RepoUrl = 'https://github.com/PlayQodeX/cowork-bridge.git'
+$RepoUrl = 'https://github.com/PlayQodeX/claude-cowork-bridge.git'
 $ClaudeDir = Join-Path $HOME '.claude'
 $SkillsDir = Join-Path $ClaudeDir 'skills'
 $CoworkSkillDir = Join-Path $SkillsDir 'cowork'
@@ -26,9 +26,9 @@ $CleanupTmpDir = $null
 if ($LocalSrc -and (Test-Path (Join-Path $LocalSrc 'skills/cowork/SKILL.md'))) {
     $SrcDir = $LocalSrc
 } else {
-    $SrcDir = Join-Path $env:TEMP "cowork-bridge-$([System.IO.Path]::GetRandomFileName().Replace('.',''))"
+    $SrcDir = Join-Path $env:TEMP "claude-cowork-bridge-$([System.IO.Path]::GetRandomFileName().Replace('.',''))"
     $CleanupTmpDir = $SrcDir
-    Write-Host "Fetching cowork-bridge into $SrcDir..."
+    Write-Host "Fetching claude-cowork-bridge into $SrcDir..."
     git clone --depth 1 $RepoUrl $SrcDir 2>&1 | Out-Null
     if ($LASTEXITCODE -ne 0) {
         throw "git clone failed. Ensure git is installed and on PATH."
@@ -36,7 +36,7 @@ if ($LocalSrc -and (Test-Path (Join-Path $LocalSrc 'skills/cowork/SKILL.md'))) {
 }
 
 try {
-    Write-Host "Installing cowork-bridge into $ClaudeDir"
+    Write-Host "Installing claude-cowork-bridge into $ClaudeDir"
 
     if (-not (Test-Path $SkillsDir))      { New-Item -ItemType Directory -Path $SkillsDir -Force | Out-Null }
     if (-not (Test-Path $CoworkSkillDir)) { New-Item -ItemType Directory -Path $CoworkSkillDir -Force | Out-Null }
