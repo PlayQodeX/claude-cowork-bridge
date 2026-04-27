@@ -1,0 +1,25 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Temp / caches
+node_modules/
+.cache/
+tmp/
+.temp/
+
+# Local-only working files (the user's own inbox / archive should never end up
+# in this repo — they live in ~/.claude/ on the user's machine, not here)
+**/cowork-inbox.local.md
+**/cowork-archive/

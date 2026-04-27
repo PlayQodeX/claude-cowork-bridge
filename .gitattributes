@@ -1,0 +1,7 @@
+# Force LF on shell scripts so they execute on Linux / macOS regardless of the
+# platform a contributor was on when they edited them. Other text files use the
+# repo default (Git auto-handles).
+
+*.sh           text eol=lf
+install.sh     text eol=lf
+*.ps1          text eol=crlf
