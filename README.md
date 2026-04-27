@@ -1,16 +1,16 @@
 # claude-cowork-bridge
 
-A Claude Code skill that bridges any Claude conversation surface (Cowork, Claude.ai, Claude Desktop, Claude for Work) into Claude Code as actionable tasks. You audit, debug, or brainstorm in one Claude surface; the output flows into a paste-driven inbox; `/cowork` in Claude Code triages it, asks one confirmation, and burns through the batch sequentially with full project-rule honouring.
+A Claude Code skill that bridges any Claude conversation surface (Cowork, Claude.ai, Claude Desktop, Claude for Work) into Claude Code as actionable tasks. You audit, debug, or brainstorm in one Claude surface; the output flows into a global inbox; `/cowork` in Claude Code triages it, asks one confirmation, and burns through the batch sequentially with full project-rule honouring.
 
 ## The problem
 
-Claude has many surfaces. Conversations on one of them (claude.ai, Cowork, Claude Desktop, Claude for Work) do not natively connect to Claude Code's filesystem-and-task layer. In practice this means copying findings one at a time, pasting into Claude Code, asking for a fix, and repeating. Slow, error-prone, impossible to batch, and easy to lose track of which findings have been actioned.
+Claude has many surfaces. Conversations on one of them (claude.ai, Cowork, Claude Desktop, Claude for Work) do not natively connect to Claude Code's filesystem-and-task layer. In practice this means handling findings one at a time, asking for a fix, then asking for the next, and so on. Slow, error-prone, impossible to batch, and easy to lose track of which findings have been actioned.
 
 `claude-cowork-bridge` closes that gap with a thin, founder-owned glue layer. It is not an app. It is one Claude Code skill (`/cowork`) plus two configuration files in `~/.claude/`.
 
 ## How it works
 
-1. The user pastes a batch of findings from any upstream Claude conversation into `~/.claude/cowork-inbox.md`.
+1. Findings from your upstream Claude conversation arrive in `~/.claude/cowork-inbox.md`. The skill consumes the inbox; how the inbox gets populated is your choice — manual paste at the lightest, or any automation transport you set up (clipboard watcher, MCP tool, browser integration). The inbox is the contract.
 2. In Claude Code, running `/cowork` reads the inbox, classifies findings (in-scope / cross-repo / out-of-scope / risk-flagged), shows one summary block, and asks for one reply.
 3. On `go`, the skill runs every in-scope finding sequentially without per-step prompting. Risk-flagged findings (data-destructive operations) pause for explicit confirmation regardless.
 4. Each completed finding moves to `~/.claude/cowork-archive/YYYY-MM-DD_<slug>.md`. Cross-repo findings leave follow-up notes for next-session pickup from another scope.
@@ -45,7 +45,7 @@ The installer copies `skills/cowork/SKILL.md` into `~/.claude/skills/cowork/` an
 ## Quick start
 
 1. Open Claude Code in any project.
-2. Paste a finding (or several) below the `---` in `~/.claude/cowork-inbox.md`.
+2. Land a finding (or several) in `~/.claude/cowork-inbox.md` — paste below the `---` for a manual first run, or wire up your transport of choice for steady-state.
 3. Run `/cowork`. Reply `go` to the summary.
 4. Walk away. Come back to the aggregate report.
 

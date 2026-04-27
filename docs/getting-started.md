@@ -24,7 +24,7 @@ Open Claude Code in any project and check the available-skills list. You should 
 
 ## 3. (Optional) Tell the skill about your project
 
-Without configuration, every finding is treated as in-scope and the skill cannot tell when you've pasted findings that target a different app. To enable scope-detection, create `~/.claude/cowork-config.json`:
+Without configuration, every finding is treated as in-scope and the skill cannot tell when a finding targets a different app. To enable scope-detection, create `~/.claude/cowork-config.json`:
 
 ```json
 {
@@ -35,9 +35,9 @@ Without configuration, every finding is treated as in-scope and the skill cannot
 
 See [configuration.md](configuration.md) for the full schema.
 
-## 4. Paste a finding into the inbox
+## 4. Land a finding in the inbox
 
-Open `~/.claude/cowork-inbox.md` and paste a sample finding below the `---` separator at the bottom. For a first test, paste this:
+The skill reads from `~/.claude/cowork-inbox.md`. Anything that puts findings into that file works — manual paste at the lightest, an automated transport (clipboard watcher, MCP tool, browser integration) for steady state. For a first run, paste this sample finding below the `---` separator at the bottom of the file:
 
 ```
 ## Console.log left in production code
@@ -53,6 +53,8 @@ Apps: <one of your app names, or omit if unconfigured>
 
 ---
 ```
+
+For your real workflow, set up an automated transport once and stop thinking about how findings get into the inbox. The FAQ has a short summary of the common options; see [faq.md](faq.md) under "Can the upstream Claude write directly to the inbox?".
 
 ## 5. Run `/cowork`
 
@@ -84,9 +86,11 @@ The skill will:
 The first real cycle is the verification. Once you trust the parser handles your upstream Claude's output cleanly, the steady-state usage is:
 
 1. Have your conversation in any upstream Claude surface (Cowork, Claude.ai, Claude Desktop, Claude for Work).
-2. Paste the export prompt from `~/.claude/cowork-inbox.md` (or `templates/cowork-project-instructions.md` for richer per-Project setup) at the end of the conversation.
-3. Copy the formatted reply.
-4. Paste below `---` in the inbox.
-5. `cd` into the right scope, run `/cowork`, reply `go`.
+2. Type `dispatch` (or any equivalent phrase your Project setup recognises). The upstream Claude returns the formatted batch.
+3. The batch lands in `~/.claude/cowork-inbox.md` via your transport — automatic if you've wired one up, manual paste otherwise.
+4. `cd` into the right scope, run `/cowork`, reply `go`.
 
-If you run dispatches frequently, set up Project-level custom instructions in your upstream Claude — see [cowork-side-setup.md](cowork-side-setup.md). That removes the need to paste the export prompt every cycle.
+Two setups make this reliable in steady state:
+
+- **Project-level custom instructions** in your upstream Claude — so you stop pasting the export prompt at the end of every conversation. See [cowork-side-setup.md](cowork-side-setup.md). One-time, ~5 minutes per Project.
+- **An automated inbox transport** — so step 3 stops being a paste. Common shapes: a clipboard watcher that detects inbox-shaped clipboard content and appends it to the file, an MCP tool the upstream calls directly, or a browser integration. The FAQ summarises trade-offs.

@@ -1,6 +1,6 @@
 # Cowork Inbox
 
-Paste output from any Claude conversation surface (Cowork, Claude.ai, Claude Desktop, Claude for Work) **below the separator at the bottom of this file**. Run `/cowork` in any Claude Code session to crunch through the batch.
+Findings from any Claude conversation surface (Cowork, Claude.ai, Claude Desktop, Claude for Work) land **below the separator at the bottom of this file**. Run `/cowork` in any Claude Code session to crunch through the batch. The transport that fills this file — manual paste, clipboard watcher, MCP tool, or whatever you've wired up — is upstream of the skill and is your choice.
 
 > **Scope:** this inbox is for tactical findings — bugs, lint, security flags, small refactors, type errors, hydration mismatches, single-session error fixes. Strategic plans (multi-week initiatives, full audits) belong in your project's own planning system, not here.
 
@@ -37,13 +37,12 @@ For richer per-project setup (Project-level custom instructions in your upstream
 
 ## End-to-end workflow
 
-1. Have a normal conversation in any Claude surface — paste error messages, stack traces, screenshots, describe symptoms in plain English. Iterate findings until each is sharp.
-2. At the end of the conversation, paste the export prompt above. The upstream Claude returns the formatted batch.
-3. Copy the entire formatted block.
-4. Paste **below the `---` separator at the bottom of this file**. Don't rewrite this header.
-5. Open Claude Code in the project / repo most findings target.
-6. Run `/cowork`. Reply `go` to the summary. Walk away.
-7. Come back to one aggregate report. Anything left in the inbox is intentional — out-of-scope findings (run `/cowork` from the other scope) or cross-repo follow-ups.
+1. Have a normal conversation in any Claude surface — describe errors, paste stack traces, share screenshots. Iterate findings until each is sharp.
+2. At the end of the conversation, type `dispatch` (or any equivalent phrase your upstream Project recognises). The upstream Claude returns the formatted batch.
+3. The batch lands in this file. If you've wired up an inbox transport (clipboard watcher, MCP tool, browser integration), the landing is automatic. If not, paste the formatted block below the `---` at the bottom of this file. Don't rewrite this header either way.
+4. Open Claude Code in the project / repo most findings target.
+5. Run `/cowork`. Reply `go` to the summary. Walk away.
+6. Come back to one aggregate report. Anything left in the inbox is intentional — out-of-scope findings (run `/cowork` from the other scope) or cross-repo follow-ups.
 
 ## Auto-detection
 
@@ -54,7 +53,7 @@ The skill auto-detects per finding:
 - **Title** — first heading or first non-empty line.
 - **Risk-flag** — destructive keywords listed above.
 
-The export prompt above produces output that hits all four cleanly. If you paste freeform text instead, the parser still works — it just may not classify findings as precisely.
+The export prompt above produces output that hits all four cleanly. Freeform text still works — the parser just may not classify findings as precisely.
 
 ---
 

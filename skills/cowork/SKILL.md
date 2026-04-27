@@ -5,13 +5,13 @@ description: Bridge any Claude conversation surface (Cowork, Claude.ai, Claude D
 
 # /cowork — Conversation-to-code dispatch bridge
 
-This skill is a paste-driven bridge between any Claude conversation surface (where audits, error-fix conversations, and benchmarks happen) and Claude Code (where the fixes are made). The user pastes the upstream conversation's output into a global inbox file; this skill summarises it, gets one confirmation, and burns through every in-scope finding sequentially without per-step prompting.
+This skill is a bridge between any Claude conversation surface (where audits, error-fix conversations, and benchmarks happen) and Claude Code (where the fixes are made). Findings from the upstream conversation arrive in a global inbox file; this skill summarises them, gets one confirmation, and burns through every in-scope finding sequentially without per-step prompting. The transport that populates the inbox — manual paste, clipboard watcher, MCP tool, browser integration, or anything else — is upstream of this skill and is the user's choice. The inbox is the contract.
 
 The skill is **project-agnostic**. It applies whatever rules the current project's `CLAUDE.md` defines (data safety, schema discipline, branding, testing, cross-session coordination) by routing each finding through Claude Code's normal task flow — `CLAUDE.md` rules are loaded automatically. The skill itself enforces only one rule above and beyond that: a non-negotiable pause for findings that mention data-destructive operations.
 
 ## Files this skill uses
 
-- **Inbox:** `~/.claude/cowork-inbox.md` — paste destination, never wiped except to remove a single archived finding.
+- **Inbox:** `~/.claude/cowork-inbox.md` — populated by whatever transport the user has set up. Never wiped except to remove a single archived finding.
 - **Archive:** `~/.claude/cowork-archive/` — auto-created on first archive. One file per completed finding.
 - **Optional config:** `~/.claude/cowork-config.json` — declares the user's project's app/repo names so the parser can distinguish in-scope from out-of-scope findings automatically.
 
@@ -169,7 +169,7 @@ End with a single sentence stating the user's next concrete action.
 
 ## Notes
 
-- The inbox is appended to by the user (paste from upstream Claude). The skill removes findings only when archiving them on successful completion.
-- If parsing fails (the upstream output is malformed or the user pasted something the splitter can't handle), tell the user what was parsed, what was not, and ask for guidance — never silently drop findings.
+- The inbox is append-only from the skill's perspective — populated upstream by whatever transport the user runs (manual paste, clipboard watcher, MCP tool, browser integration). The skill removes findings only when archiving them on successful completion.
+- If parsing fails (the upstream output is malformed or the inbox contains something the splitter can't handle), tell the user what was parsed, what was not, and ask for guidance — never silently drop findings.
 - This skill carries no schema, no migration, no destructive operation of its own. It is a triage and dispatch layer over Claude Code's normal task flow; every project guardrail comes from your `CLAUDE.md`.
 - Cowork-side companion: the source repo ships `templates/cowork-project-instructions.md`, a custom-instructions template you paste into your upstream Claude conversation's Project settings so the upstream emits findings in inbox-ready format by default.

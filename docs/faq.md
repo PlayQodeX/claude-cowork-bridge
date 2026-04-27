@@ -6,15 +6,17 @@ Because the value lives in the cross-surface bridge — Cowork → inbox → Cla
 
 ## Does this work with claude.ai? Claude Desktop? Claude for Work? Cowork specifically?
 
-Yes to all of them. The skill itself doesn't talk to the upstream surface. You paste from wherever, into the inbox file. The `cowork` name is historical — the skill works with any Claude conversation surface that emits text you can copy.
+Yes to all of them. The skill itself doesn't talk to the upstream surface. Findings flow into the inbox file from wherever, by whatever transport you set up. The `cowork` name is historical — the skill works with any Claude conversation surface that emits text.
 
-## Can the upstream Claude write directly to the inbox without me pasting?
+## How does the upstream Claude actually get findings into the inbox?
 
-Not natively. A browser-based Claude can't touch your filesystem. Three realistic options to remove the paste step, in order of effort:
+The skill consumes the inbox file; the inbox is the contract. How it gets populated is upstream of the skill and is your choice. Three common shapes, in order of effort:
 
-1. **Project-level custom instructions** — automate the format only, paste still happens manually. ~5 minutes per Project. See [cowork-side-setup.md](cowork-side-setup.md).
-2. **Clipboard watcher** — a small background script that detects inbox-shaped clipboard content and auto-appends to the inbox. ~30 minutes to build. Not shipped here yet.
-3. **MCP server bridge** — an outbound MCP tool the upstream Claude calls directly. Hours to build. Only works if your upstream supports outbound MCP.
+1. **Manual paste** — at the lightest, copy the upstream's formatted reply, paste below the `---` in `~/.claude/cowork-inbox.md`. Zero infrastructure. Fine for occasional use.
+2. **Clipboard watcher** — a small background script that detects inbox-shaped clipboard content and auto-appends to the inbox. The upstream Claude returns the formatted block on `dispatch`; the watcher catches the copy and writes the file. ~30 minutes to build, removes the paste step entirely.
+3. **MCP server bridge** — an outbound MCP tool the upstream Claude calls directly. Hours to build. Only works if your upstream surface supports outbound MCP.
+
+This repo ships the skill (the inbox consumer). It does not ship a transport — pick whichever fits your workflow. For most users, **Project-level custom instructions in the upstream** ([cowork-side-setup.md](cowork-side-setup.md)) plus a clipboard watcher is the sweet spot: the upstream emits inbox-ready format on demand, the watcher writes to the file, and you only ever interact with `/cowork` in Claude Code.
 
 ## What if the parser doesn't handle my upstream's output?
 

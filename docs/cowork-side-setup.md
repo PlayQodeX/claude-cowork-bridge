@@ -1,19 +1,10 @@
 # Cowork-side setup
 
-Configuring your upstream Claude conversation surface (Cowork / Claude.ai / Claude Desktop / Claude for Work) to emit findings in inbox-ready format by default — so you stop pasting the export prompt at the end of every conversation.
+Configuring your upstream Claude conversation surface (Cowork / Claude.ai / Claude Desktop / Claude for Work) to emit findings in inbox-ready format by default. This is the format-side automation: typing `dispatch` returns a parser-ready block. Pair it with an inbox transport (clipboard watcher, MCP, etc. — see [faq.md](faq.md)) and the daily flow becomes hands-free.
 
 ## What this saves
 
-Without per-Project custom instructions, every dispatch requires:
-
-1. Open the inbox file.
-2. Copy the export prompt from its header.
-3. Paste into the upstream conversation.
-4. Wait for the formatted reply.
-5. Copy the reply.
-6. Paste into the inbox.
-
-With per-Project custom instructions, steps 2–4 disappear. You type "dispatch" in the upstream conversation; the formatted block is the reply.
+Without per-Project custom instructions, every dispatch requires copying the export prompt from the inbox header into the upstream conversation, waiting for the formatted reply, and only then can the reply land in the inbox. With per-Project custom instructions, the format prompt is implicit — you type `dispatch`, the upstream emits the parser-ready block immediately, and the only remaining step is getting it into the inbox (which a transport handles automatically).
 
 ## Setup
 
