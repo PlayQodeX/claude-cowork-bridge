@@ -1,3 +1,11 @@
+<p align="center">
+  <img src="./assets/logo.png" alt="claude-cowork-bridge" width="160">
+</p>
+
+<p align="center">
+  <img src="./assets/readme-banner.png" alt="claude-cowork-bridge" width="100%">
+</p>
+
 # claude-cowork-bridge
 
 A Claude Code skill that bridges any Claude conversation surface (Cowork, Claude.ai, Claude Desktop, Claude for Work) into Claude Code as actionable tasks. You audit, debug, or brainstorm in one Claude surface; the output flows into a global inbox; `/cowork` in Claude Code triages it, asks one confirmation, and burns through the batch sequentially with full project-rule honouring.
