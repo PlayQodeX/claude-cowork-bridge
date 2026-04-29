@@ -1,8 +1,4 @@
 <p align="center">
-  <img src="./assets/logo.png" alt="claude-cowork-bridge" width="160">
-</p>
-
-<p align="center">
   <img src="./assets/readme-banner.png" alt="claude-cowork-bridge" width="100%">
 </p>
 
